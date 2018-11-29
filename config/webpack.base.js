@@ -4,7 +4,8 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const os = require('os')
 const HappyPack = require('happypack')
 const happyThreadPool = HappyPack.ThreadPool({size: os.cpus().length})
-
+const ProgressBarPlugin = require('progress-bar-webpack-plugin');
+const chalk = require('chalk')
 
 module.exports = {
   entry: ["babel-polyfill", './src/index.js'],
@@ -48,6 +49,11 @@ module.exports = {
   plugins: [
     new MiniCssExtractPlugin({
       filename: "css/[name].[hash:8].css",
+    }),
+    new ProgressBarPlugin({
+      format: '  build [:bar] ' + chalk.green.bold(':percent') + ' (:elapsed seconds)',
+      clear: false,
+      width: 200
     }),
     new HtmlWebpackPlugin({
       inject: true,

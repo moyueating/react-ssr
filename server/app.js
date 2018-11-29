@@ -11,7 +11,7 @@ const template = fs.readFileSync(path.join(__dirname, '../dist/index.html'), 'ut
 
 const app = express()
 
-// public开头的请求全部归为资源文件，只想dist文件夹
+// public开头的请求全部归为资源文件，指向dist文件夹
 app.use('/public', express.static(path.join(__dirname, '../dist')))
 
 

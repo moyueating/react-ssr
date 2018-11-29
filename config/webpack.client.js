@@ -3,6 +3,7 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const webpackBaseConfig = require('./webpack.base.js');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
+
 module.exports = merge(webpackBaseConfig, {
   mode: 'production',
   plugins: [
@@ -11,6 +12,6 @@ module.exports = merge(webpackBaseConfig, {
     //   verbose: true,
     //   dry: false
     // }),
-    new UglifyJSPlugin()
+    new UglifyJSPlugin(),
   ]
 })
