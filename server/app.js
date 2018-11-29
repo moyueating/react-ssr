@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOMServer from 'react-dom/server';
 import {StaticRouter} from 'react-router';
-import layout from './layout';
 import Routes from '../src/routes';
 import express from 'express'
 import path from 'path'

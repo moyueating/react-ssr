@@ -8,11 +8,11 @@ const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const chalk = require('chalk')
 
 module.exports = {
-  entry: ["babel-polyfill", './src/index.js'],
+  // entry: ["babel-polyfill", './src/index.js'],
   output: {
     path: path.resolve(__dirname, '../dist'),
     filename: "js/main.[hash:8].js",
-    publicPath: '/public'
+    publicPath: '/public/'
   },
   module: {
     rules: [

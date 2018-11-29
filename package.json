@@ -6,8 +6,10 @@
   "scripts": {
     "start": "node dist/server.js",
     "clear": "rimraf dist",
-    "build:client": "webpack --config config/webpack.client.js",
-    "build:server": "webpack --config config/webpack.server.js",
+    "build:client": "cross-env NODE_ENV=production webpack --config config/webpack.client.pro.js",
+    "build:server": "cross-env NODE_ENV=production webpack --config config/webpack.server.js",
+    "dev:client": "cross-env NODE_ENV=development webpack-dev-server --config config/webpack.client.dev.js",
+    "dev:server": "cross-env NODE_ENV=development webpack --config config/webpack.server.js",
     "build": "npm run clear && npm run build:client && npm run build:server"
   },
   "keywords": [
@@ -34,6 +36,7 @@
     "babel-preset-stage-0": "^6.24.1",
     "chalk": "^2.4.1",
     "clean-webpack-plugin": "^1.0.0",
+    "cross-env": "^5.2.0",
     "css-loader": "^1.0.1",
     "file-loader": "^2.0.0",
     "happypack": "^5.0.0",
@@ -44,6 +47,7 @@
     "postcss-loader": "^3.0.0",
     "postcss-preset-env": "^6.4.0",
     "progress-bar-webpack-plugin": "^1.11.0",
+    "react-hot-loader": "^4.3.12",
     "rimraf": "^2.6.2",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
