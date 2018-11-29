@@ -1,6 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const os = require('os')
 const HappyPack = require('happypack')
 const happyThreadPool = HappyPack.ThreadPool({size: os.cpus().length})
@@ -10,7 +10,8 @@ module.exports = {
   entry: ["babel-polyfill", './src/index.js'],
   output: {
     path: path.resolve(__dirname, '../dist'),
-    filename: "js/main.js"
+    filename: "js/main.[hash:8].js",
+    publicPath: '/public'
   },
   module: {
     rules: [
@@ -24,7 +25,10 @@ module.exports = {
       {
         test: /\.s?css$/,
         use: [
-          'style-loader',
+          {
+            loader: MiniCssExtractPlugin.loader,
+          },
+          // 'style-loader',
           { loader: 'css-loader', options: { importLoaders: 1 } },
           'postcss-loader',
           'sass-loader'
@@ -42,10 +46,8 @@ module.exports = {
     ]
   },
   plugins: [
-    new CleanWebpackPlugin(['dist'], {
-      root: process.cwd(),
-      verbose: true,
-      dry: false
+    new MiniCssExtractPlugin({
+      filename: "css/[name].[hash:8].css",
     }),
     new HtmlWebpackPlugin({
       inject: true,

@@ -5,7 +5,7 @@ import Home from '../pages/Home';
 export default () => {
   return (
     <Switch>
-      <Route exact path="/list" component={Home} />
+      <Route exact path="/" component={Home} />
     </Switch>
   )
 }

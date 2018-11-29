@@ -6,7 +6,7 @@ export default class Home extends Component {
   render() {
     return (
       <div>
-        <p>this is home page</p>
+        <p>原创标签</p>
       </div>
     )
   }
