@@ -1,5 +1,4 @@
 {
-  "plugins": ["react-hot-loader/babel", "transform-runtime"],
   "presets": [
     ["env", {
       "targets": {
@@ -12,5 +11,6 @@
     }], 
     "react", 
     "stage-0"
-  ]
+  ],
+  "plugins": ["react-hot-loader/babel", "transform-runtime"]
 }

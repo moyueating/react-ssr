@@ -8,7 +8,6 @@ const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const chalk = require('chalk')
 
 module.exports = {
-  // entry: ["babel-polyfill", './src/index.js'],
   output: {
     path: path.resolve(__dirname, '../dist'),
     filename: "js/main.[hash:8].js",
@@ -21,7 +20,9 @@ module.exports = {
         // use: 'babel-loader',
         use: ['happypack/loader?id=js'],
         include: path.resolve(__dirname, '../src'),
-        exclude: /node_modules/
+        exclude: [
+          path.resolve(__dirname, '../node_modules')
+        ]
       },
       {
         test: /\.s?css$/,
@@ -34,7 +35,9 @@ module.exports = {
           'postcss-loader',
           'sass-loader'
         ],
-        exclude: /node_modules/
+        exclude: [
+          path.resolve(__dirname, '../node_modules')
+        ]
       },
       {
         test: /\.(jpe?g|png|gif|svg|woff|woff2|eot|ttf)$/,

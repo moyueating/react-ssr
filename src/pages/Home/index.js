@@ -10,8 +10,8 @@ export default class Home extends Component {
   render() {
     return (
       <div>
-        <p onClick={this.click}>原创标签d</p>
-      </div>
+        <p onClick={this.click}>原创标签 好的 水电费</p>
+      </div> 
     )
   }
 }

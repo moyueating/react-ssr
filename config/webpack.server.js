@@ -1,24 +1,17 @@
 const path = require('path');
-const nodeExternals = require('webpack-node-externals');
-
-console.log(path.resolve(__dirname, 'node_modules'))
-
+const nodeExternals = require('webpack-node-externals')
 
 module.exports = {
-  mode: 'production',
-  // JS 执行入口文件
-  entry: './server/index.js',
+  mode: process.env.NODE_ENV,
   target: 'node',
-  // 为了不打包进 node_modules 目录下的第三方模块
-  externals: [nodeExternals()],
+  externals: Object.keys(require('../package.json')).dependencies,
+  // JS 执行入口文件
+  entry: [path.resolve(__dirname, '../server/app.js')],
   output: {
-    // 为了以 CommonJS2 规范导出渲染函数，以给采用 Nodejs 编写的 HTTP 服务调用
-    libraryTarget: 'commonjs2',
-    // 把最终可在 Nodejs 中运行的代码输出到一个 bundle.js 文件
-    filename: 'server.js',
-    // 输出文件都放到 dist 目录下
+    filename: 'server_entry.js',
     path: path.resolve(__dirname, '../dist'),
-    publicPath: '/public'
+    publicPath: '/public',
+    libraryTarget: 'commonjs2',
   },
   // 启用node的__dirname
   node: {
@@ -28,11 +21,15 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
-        use: ['babel-loader'],
-        exclude:  /node_modules/,  
+        test: /.jsx?$/,
+        loader: 'babel-loader',
+        exclude: [
+          path.resolve(__dirname, '../node_modules')
+        ]
       }
     ]
   },
-  devtool: 'source-map' // 输出 source-map 方便直接调试 ES6 源码
+  resolve: {
+    extensions: ['.js', '.jsx']
+  }
 };
