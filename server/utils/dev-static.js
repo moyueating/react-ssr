@@ -1,5 +1,6 @@
 /**
- * 通过webpack函数直接去监听内存中打包文件的变化，动态读取内存中的bundle作为入口文件
+ * 通过webpack函数直接去监听内存中打包文件的变化，通过内存中的path动态读取编译后的bundle
+ * 并通过将读取的字符串bundle模块化，最终输出我们的app
  */
 
 const path = require('path')
