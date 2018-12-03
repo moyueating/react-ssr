@@ -1,7 +1,8 @@
 const path = require('path');
-const nodeExternals = require('webpack-node-externals')
+const merge = require('webpack-merge');
+const webpackBaseConfig = require('./webpack.base.js');
 
-module.exports = {
+module.exports = merge(webpackBaseConfig, {
   mode: process.env.NODE_ENV,
   target: 'node',
   externals: Object.keys(require('../package.json')).dependencies,
@@ -9,8 +10,6 @@ module.exports = {
   entry: [path.resolve(__dirname, '../server/app.js')],
   output: {
     filename: 'server_entry.js',
-    path: path.resolve(__dirname, '../dist'),
-    publicPath: '/public',
     libraryTarget: 'commonjs2',
   },
   // 启用node的__dirname
@@ -28,8 +27,5 @@ module.exports = {
         ]
       }
     ]
-  },
-  resolve: {
-    extensions: ['.js', '.jsx']
   }
-};
+})

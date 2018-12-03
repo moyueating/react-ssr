@@ -1,9 +1,13 @@
-const express = require('express')
-const path = require('path')
 const fs = require('fs')
+const path = require('path')
+const express = require('express')
+const favicon = require('serve-favicon')
 const isDev = process.env.NODE_ENV === 'development'
 
 const app = express()
+
+app.use(favicon(path.join(__dirname, path.join('../public'), 'favicon.ico')))
+
 if(isDev){
 
   const devStatic= require('./utils/dev-static')

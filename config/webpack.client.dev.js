@@ -6,7 +6,6 @@ const path = require('path')
 
 module.exports =  merge(webpackBaseConfig, {
   devtool: 'cheap-eval-source-map',
-  mode: process.env.NODE_ENV,
   entry: ['babel-polyfill', 'react-hot-loader/patch', './src/index.js'],
   devServer: {
     host: '0.0.0.0',

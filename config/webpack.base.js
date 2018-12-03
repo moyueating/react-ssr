@@ -8,9 +8,10 @@ const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const chalk = require('chalk')
 
 module.exports = {
+  mode: process.env.NODE_ENV,
   output: {
     path: path.resolve(__dirname, '../dist'),
-    filename: "js/main.[hash:8].js",
+    filename: "[name].[hash:8].js",
     publicPath: '/public/'
   },
   module: {
@@ -70,4 +71,7 @@ module.exports = {
       threadPool: happyThreadPool
     }),
   ],
+  resolve: {
+    extensions: ['.js', '.jsx']
+  }
 };
