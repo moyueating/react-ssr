@@ -1,6 +1,6 @@
 import React from 'react';
 import { StaticRouter } from 'react-router';
-import Routes from '../src/routes';
+import Routes from '../client/routes';
 
 
 export default () => {

@@ -12,5 +12,5 @@
     "react", 
     "stage-0"
   ],
-  "plugins": ["react-hot-loader/babel", "transform-runtime"]
+  "plugins": ["transform-decorators-legacy", "react-hot-loader/babel", "transform-runtime"]
 }

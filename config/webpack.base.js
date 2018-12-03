@@ -20,7 +20,7 @@ module.exports = {
         test: /\.jsx?$/,
         // use: 'babel-loader',
         use: ['happypack/loader?id=js'],
-        include: path.resolve(__dirname, '../src'),
+        include: path.resolve(__dirname, '../client'),
         exclude: [
           path.resolve(__dirname, '../node_modules')
         ]
