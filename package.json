@@ -4,7 +4,6 @@
   "description": "react-ssr",
   "private": true,
   "scripts": {
-    "start": "node dist/server.js",
     "clear": "rimraf dist",
     "build:client": "cross-env NODE_ENV=production webpack --config config/webpack.client.pro.js",
     "build:server": "cross-env NODE_ENV=production webpack --config config/webpack.server.js",
