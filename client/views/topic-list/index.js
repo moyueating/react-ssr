@@ -14,35 +14,41 @@ export default class TopicList extends Component {
     alert('clicked!')
   }
 
-  // componentDidMount() {
-  //   axios.get('https://cnodejs.org/api/v1/topics').then(res => {
-  //     console.log(res)
-  //   })
-  // }
+  componentDidMount() {
+    axios.get('/api/topics').then(res => {
+      console.log(res)
+    })
+  }
 
-  // login = () => {
-  //   axios.post('https://cnodejs.org/api/v1/accesstoken', {
-  //     accesstoken: ''
-  //   }).then(res => {
-  //     console.log(res)
-  //   })
-  // }
+  login = () => {
+    axios.post('/api/user/login', {
+      accessToken: ''
+    }).then(res => {
+      console.log(res)
+    })
+  }
 
-  // mark = () => {
-  //   axios.post('https://cnodejs.org/api/v1/message/mark_all', {
-  //     accesstoken: ''
-  //   }).then(res => {
-  //     console.log(res)
-  //   })
-  // }
+  mark = () => {
+    axios.post('/api/message/mark_all?needAccessToken=true').then(res => {
+      console.log(res)
+    })
+  }
+
+  mobx = () => {
+    this.props.appStore.appState.add()
+  }  
 
   render() {
-    console.log(this.props)
+    // console.log(this.props)
     return (
       <div>
         <p onClick={this.click}>this is topic list</p>
-        {/* <button onClick={this.login}>login</button>
-        <button onClick={this.mark}>mark all</button> */}
+        <p>{this.props.appStore.appState.count}</p>
+        <p>{this.props.appStore.appState.count}</p>
+        <p>{this.props.appStore.appState.count}</p>
+        <button onClick={this.mobx}>test mobx</button>
+        <button onClick={this.login}>login</button>
+        <button onClick={this.mark}>mark all</button>
       </div> 
     )
   }

@@ -33,7 +33,6 @@ serverCompile.watch({}, (err, stats) => {
     webpackServerConfig.output.path,
     webpackServerConfig.output.filename
   )
-  console.log('bundlePath', bundlePath)
   const bundle = mfs.readFileSync(bundlePath, 'utf-8')
   const m = new Module()
   m._compile(bundle, 'server_entry.js')
@@ -57,9 +56,19 @@ module.exports = function devSSR(app) {
   }))
 
   app.get('*', (req, res) => {
-    // console.log(req)
+    // console.log('body', req.body)
+    console.log(req.url)
     getTemplate().then(tpl => {
-      const content = ReactDomServer.renderToString(serverBundle)
+      const routerContext = {}
+      const appHtml = serverBundle(req.url, routerContext)
+      const content = ReactDomServer.renderToString(appHtml)
+
+      console.log(routerContext)
+      if(routerContext.url){
+        res.redirect(302, routerContext.url)
+        return res.end()
+      }
+
       console.log('content',content)
       res.send(
         tpl.replace('<!--app-->', content)

@@ -1,17 +1,21 @@
 import React from 'react';
 import { StaticRouter } from 'react-router';
 import Routes from '../client/routes';
-import { Provider } from 'mobx-react';
+import { Provider, useStaticRendering } from 'mobx-react';
 import AppStore from '../client/store';
 
+useStaticRendering(true)
 
-export default (
-  <Provider appStore={AppStore}>
-    <StaticRouter
-      location='/list'
-      context={{}}
-    >
-      <Routes />
-    </StaticRouter>  
-  </Provider>
-)
+export default (url, routerContext) => {
+
+  return (
+    <Provider appStore={AppStore}>
+      <StaticRouter
+        location={url}
+        context={routerContext}
+      >
+        <Routes />
+      </StaticRouter>  
+    </Provider>
+  )
+}

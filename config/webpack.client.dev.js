@@ -18,6 +18,12 @@ module.exports =  merge(webpackBaseConfig, {
     publicPath: '/public',
     historyApiFallback: {
       index: '/public/index.html'
+    },
+    proxy: {
+      "/api": {
+        target: 'http://localhost:3333',
+        changeOrigin: true
+      }
     }
   },
   plugins: [
