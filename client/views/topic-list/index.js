@@ -14,35 +14,35 @@ export default class TopicList extends Component {
     alert('clicked!')
   }
 
-  componentDidMount() {
-    axios.get('https://cnodejs.org/api/v1/topics').then(res => {
-      console.log(res)
-    })
-  }
+  // componentDidMount() {
+  //   axios.get('https://cnodejs.org/api/v1/topics').then(res => {
+  //     console.log(res)
+  //   })
+  // }
 
-  login = () => {
-    axios.post('https://cnodejs.org/api/v1/accesstoken', {
-      accesstoken: ''
-    }).then(res => {
-      console.log(res)
-    })
-  }
+  // login = () => {
+  //   axios.post('https://cnodejs.org/api/v1/accesstoken', {
+  //     accesstoken: ''
+  //   }).then(res => {
+  //     console.log(res)
+  //   })
+  // }
 
-  mark = () => {
-    axios.post('https://cnodejs.org/api/v1/message/mark_all', {
-      accesstoken: ''
-    }).then(res => {
-      console.log(res)
-    })
-  }
+  // mark = () => {
+  //   axios.post('https://cnodejs.org/api/v1/message/mark_all', {
+  //     accesstoken: ''
+  //   }).then(res => {
+  //     console.log(res)
+  //   })
+  // }
 
   render() {
     console.log(this.props)
     return (
       <div>
         <p onClick={this.click}>this is topic list</p>
-        <button onClick={this.login}>login</button>
-        <button onClick={this.mark}>mark all</button>
+        {/* <button onClick={this.login}>login</button>
+        <button onClick={this.mark}>mark all</button> */}
       </div> 
     )
   }

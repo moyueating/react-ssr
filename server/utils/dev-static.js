@@ -33,6 +33,7 @@ serverCompile.watch({}, (err, stats) => {
     webpackServerConfig.output.path,
     webpackServerConfig.output.filename
   )
+  console.log('bundlePath', bundlePath)
   const bundle = mfs.readFileSync(bundlePath, 'utf-8')
   const m = new Module()
   m._compile(bundle, 'server_entry.js')
@@ -42,7 +43,7 @@ serverCompile.watch({}, (err, stats) => {
 
 function getTemplate() {
   return new Promise((resolve, reject) => {
-    axios.get('http://localhost:3000/public/index.html').then(res => {
+    axios.get('http://localhost:8888/public/index.html').then(res => {
       resolve(res.data)
     }).catch(reject)
   })
@@ -52,12 +53,14 @@ function getTemplate() {
 module.exports = function devSSR(app) {
 
   app.use('/public', proxy({
-    target: 'http://127.0.0.1:3000'
+    target: 'http://127.0.0.1:8888'
   }))
 
   app.get('*', (req, res) => {
+    // console.log(req)
     getTemplate().then(tpl => {
       const content = ReactDomServer.renderToString(serverBundle)
+      console.log('content',content)
       res.send(
         tpl.replace('<!--app-->', content)
       )  

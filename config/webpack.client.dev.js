@@ -9,7 +9,7 @@ module.exports =  merge(webpackBaseConfig, {
   entry: ['babel-polyfill', 'react-hot-loader/patch', './client/index.js'],
   devServer: {
     host: '0.0.0.0',
-    port: '3000',
+    port: '8888',
     contentBase: path.join(__dirname, "../dist"),
     hot: true,
     overlay: true,
