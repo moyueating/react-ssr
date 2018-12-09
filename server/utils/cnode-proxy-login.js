@@ -9,7 +9,7 @@ router.post('/login', function (req, res, next) {
 	axios.post(`${baseUrl}/accesstoken`, {
 		accesstoken: accessToken,
 	}).then(result => {
-		if(result.status === 200 && result.data.success){
+		if (result.status === 200 && result.data.success) {
 			req.session.user = {
 				accessToken,
 				loginName: result.data.loginname,
@@ -22,13 +22,13 @@ router.post('/login', function (req, res, next) {
 			data: result.data
 		})
 	}).catch(err => {
-        console.log(err.response)
-		if(err.response){
+		console.log(err.response)
+		if (err.response) {
 			res.json({
 				success: false,
 				data: err.response.data
 			})
-		}else{
+		} else {
 			next(err)
 		}
 	})
