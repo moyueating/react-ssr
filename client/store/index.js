@@ -1,6 +1,12 @@
-import AppState from './app-state'
+import Global from './global'
 
 
 export default {
-  appState: new AppState()
+  global: new Global()
+}
+
+export const createStore = () => {
+  return {
+    global: new Global()
+  }
 }

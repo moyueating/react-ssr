@@ -6,7 +6,7 @@ import {
 } from 'mobx';
 
 
-export default class AppState {
+export default class Global {
   @observable count = 0
   @observable name = 'zkj'
 

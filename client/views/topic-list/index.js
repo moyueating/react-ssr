@@ -10,14 +10,23 @@ import axios from 'axios';
 @observer
 export default class TopicList extends Component {
 
-  click = () => {
-    alert('clicked!')
-  }
-
   componentDidMount() {
     axios.get('/api/topics').then(res => {
       console.log(res)
     })
+  }
+
+  bootstrap() {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        this.props.appStore.global.count = 3
+        resolve(true)
+      })
+    })
+  }
+
+  click = () => {
+    alert('clicked!')
   }
 
   login = () => {
@@ -40,12 +49,11 @@ export default class TopicList extends Component {
 
   render() {
     // console.log(this.props)
+    console.log( this.props.appStore.global.count)
     return (
       <div>
         <p onClick={this.click}>this is topic list</p>
-        <p>{this.props.appStore.appState.count}</p>
-        <p>{this.props.appStore.appState.count}</p>
-        <p>{this.props.appStore.appState.count}</p>
+        <p>{this.props.appStore.global.count}</p>
         <button onClick={this.mobx}>test mobx</button>
         <button onClick={this.login}>login</button>
         <button onClick={this.mark}>mark all</button>

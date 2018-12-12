@@ -9,6 +9,7 @@ const webpack = require('webpack')
 const proxy = require('http-proxy-middleware')
 const ReactDomServer = require('react-dom/server')
 const MemoryFileSystem = require("memory-fs")
+const bootstrapper = require("react-async-bootstrapper")
 const webpackServerConfig = require('../../config/webpack.server')
 
 const Module = require('module')
@@ -16,7 +17,7 @@ const mfs = new MemoryFileSystem()
 
 const serverCompile = webpack(webpackServerConfig)
 
-let serverBundle
+let serverBundle, createStore
 // 关键：将webpack输入指定内存中
 serverCompile.outputFileSystem = mfs
 serverCompile.watch({}, (err, stats) => {
@@ -37,6 +38,7 @@ serverCompile.watch({}, (err, stats) => {
   const m = new Module()
   m._compile(bundle, 'server_entry.js')
   serverBundle = m.exports.default
+  createStore = m.exports.createStore
 })
 
 
@@ -56,23 +58,23 @@ module.exports = function devSSR(app) {
   }))
 
   app.get('*', (req, res) => {
-    // console.log('body', req.body)
-    console.log(req.url)
+    // console.log(req.url)
     getTemplate().then(tpl => {
       const routerContext = {}
-      const appHtml = serverBundle(req.url, routerContext)
+      const stores = createStore()
+      const appHtml = serverBundle(stores, req.url, routerContext)
       const content = ReactDomServer.renderToString(appHtml)
 
-      console.log(routerContext)
-      if(routerContext.url){
-        res.redirect(302, routerContext.url)
-        return res.end()
-      }
-
-      console.log('content',content)
-      res.send(
-        tpl.replace('<!--app-->', content)
-      )  
+      bootstrapper(appHtml).then(() => {
+        // console.log(routerContext)
+        if(routerContext.url){
+          res.redirect(302, routerContext.url)
+          return res.end()
+        }
+        console.log('count', stores.global.count)
+        // console.log('content',content)
+        res.send(tpl.replace('<!--app-->', content)) 
+      })
     })
   })
 

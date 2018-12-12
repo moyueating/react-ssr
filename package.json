@@ -27,6 +27,7 @@
     "prop-types": "^15.6.2",
     "query-string": "^6.2.0",
     "react": "^16.6.3",
+    "react-async-bootstrapper": "^2.1.1",
     "react-dom": "^16.6.3",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",

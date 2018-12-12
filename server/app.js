@@ -2,14 +2,14 @@ import React from 'react';
 import { StaticRouter } from 'react-router';
 import Routes from '../client/routes';
 import { Provider, useStaticRendering } from 'mobx-react';
-import AppStore from '../client/store';
+import {createStore} from '../client/store';
 
 useStaticRendering(true)
 
-export default (url, routerContext) => {
-
+export default (stores, url, routerContext) => {
+  
   return (
-    <Provider appStore={AppStore}>
+    <Provider appStore={stores}>
       <StaticRouter
         location={url}
         context={routerContext}
@@ -19,3 +19,5 @@ export default (url, routerContext) => {
     </Provider>
   )
 }
+
+export { createStore }
