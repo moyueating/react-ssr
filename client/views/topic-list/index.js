@@ -44,12 +44,12 @@ export default class TopicList extends Component {
   }
 
   mobx = () => {
-    this.props.appStore.appState.add()
+    this.props.appStore.global.add()
   }  
 
   render() {
     // console.log(this.props)
-    console.log( this.props.appStore.global.count)
+    console.log('ssss', this.props.appStore.global.count)
     return (
       <div>
         <p onClick={this.click}>this is topic list</p>
