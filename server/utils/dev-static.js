@@ -50,6 +50,13 @@ function getTemplate() {
   })
 }
 
+const getStoreState = (stores) => {
+  return Object.keys(stores).reduce((result, storeName) => {
+    result[storeName] = stores[storeName].toJson()
+    return result
+  }, {})
+}
+
 
 module.exports = function devSSR(app) {
 
@@ -72,8 +79,10 @@ module.exports = function devSSR(app) {
           return res.end()
         }
         console.log('count', stores.global.count)
+        const state = getStoreState(stores)
+        console.log(state)
         // console.log('content',content)
-        res.send(tpl.replace('<!--app-->', content)) 
+        res.send(tpl.replace('<!--app-->', content).replace('<>', JSON.stringify(state))) 
       })
     })
   })

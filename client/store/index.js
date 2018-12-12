@@ -1,9 +1,7 @@
 import Global from './global'
 
 
-export default {
-  global: new Global()
-}
+export default Global
 
 export const createStore = () => {
   return {

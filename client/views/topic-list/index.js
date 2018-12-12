@@ -19,7 +19,7 @@ export default class TopicList extends Component {
   bootstrap() {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        this.props.appStore.global.count = 3
+        this.props.appStore.global.count = 8
         resolve(true)
       })
     })

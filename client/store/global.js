@@ -7,8 +7,12 @@ import {
 
 
 export default class Global {
-  @observable count = 0
-  @observable name = 'zkj'
+  constructor( {count, name} = {count: 0, name: 'syr'} ){
+    this.count = count
+    this.name = name
+  }
+  @observable count
+  @observable name
 
   @computed get msg() {
     return `${this.name} say hello ${this.count}`
@@ -16,5 +20,12 @@ export default class Global {
 
   @action add(){
     this.count += 1
+  }
+
+  toJson() {
+    return {
+      count: this.count,
+      name: this.name
+    }
   }
 }
