@@ -81,8 +81,7 @@ module.exports = function devSSR(app) {
         // console.log('count', stores.global.count)
         const state = getStoreState(stores)
         const content = ReactDomServer.renderToString(appHtml)
-        // console.log(state)
-        // console.log('content',content)
+
         res.send(tpl.replace('<!--app-->', content).replace('<>', JSON.stringify(state))) 
       })
     })

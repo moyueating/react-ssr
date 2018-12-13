@@ -6,8 +6,7 @@ import { Provider } from 'mobx-react';
 import Global from './store';
 
 const initialState = JSON.parse(window.__INITIAL__STATE__) || {}
-// console.log(initialState)
-// console.log(initialState.global)
+
 const appStore = {
   global: new Global(initialState.global)
 }
