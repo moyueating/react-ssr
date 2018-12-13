@@ -69,18 +69,19 @@ module.exports = function devSSR(app) {
     getTemplate().then(tpl => {
       const routerContext = {}
       const stores = createStore()
+      // console.log(stores.global.count)
       const appHtml = serverBundle(stores, req.url, routerContext)
-      const content = ReactDomServer.renderToString(appHtml)
 
       bootstrapper(appHtml).then(() => {
-        // console.log(routerContext)
+        console.log('sss', routerContext)
         if(routerContext.url){
           res.redirect(302, routerContext.url)
           return res.end()
         }
-        console.log('count', stores.global.count)
+        // console.log('count', stores.global.count)
         const state = getStoreState(stores)
-        console.log(state)
+        const content = ReactDomServer.renderToString(appHtml)
+        // console.log(state)
         // console.log('content',content)
         res.send(tpl.replace('<!--app-->', content).replace('<>', JSON.stringify(state))) 
       })

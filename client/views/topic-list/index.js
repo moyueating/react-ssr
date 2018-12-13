@@ -17,6 +17,7 @@ export default class TopicList extends Component {
   }
 
   bootstrap() {
+    console.log('bootstrap')
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         this.props.appStore.global.count = 8
@@ -49,7 +50,8 @@ export default class TopicList extends Component {
 
   render() {
     // console.log(this.props)
-    console.log('ssss', this.props.appStore.global.count)
+    // console.log('ssss', this.props.appStore.global.count)
+    console.log('render')
     return (
       <div>
         <p onClick={this.click}>this is topic list</p>
