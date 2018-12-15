@@ -5,6 +5,7 @@ import {
 } from 'mobx-react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import { Helmet } from "react-helmet";
 
 @inject('appStore')
 @observer
@@ -17,7 +18,6 @@ export default class TopicList extends Component {
   }
 
   bootstrap() {
-    console.log('bootstrap')
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         this.props.appStore.global.count = 8
@@ -54,6 +54,10 @@ export default class TopicList extends Component {
     console.log('render')
     return (
       <div>
+        <Helmet>
+          <title>cnode topic list</title>
+          <meta name="keywords" content="react ssr" />
+        </Helmet>
         <p onClick={this.click}>this is topic list</p>
         <p>{this.props.appStore.global.count}</p>
         <button onClick={this.mobx}>test mobx</button>

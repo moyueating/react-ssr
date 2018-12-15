@@ -47,7 +47,7 @@ module.exports = {
           limit: 10000,
           name: 'dist/media/[name].[ext]',
         },
-      }
+      },
     ]
   },
   plugins: [
@@ -61,7 +61,12 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       inject: true,
-      template: 'public/index.html',
+      template: path.resolve(__dirname, '../public/index.html'),
+    }),
+    new HtmlWebpackPlugin({
+      inject: true,
+      template: '!!ejs-compiled-loader!' + path.resolve(__dirname, '../public/server.ejs'),
+      filename: 'server.ejs'
     }),
     new HappyPack({
       // 用唯一的标识符 id 来代表当前的 HappyPack 是用来处理一类特定的文件

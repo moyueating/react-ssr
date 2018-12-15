@@ -5,7 +5,7 @@ import { createBrowserHistory } from 'history';
 import { Provider } from 'mobx-react';
 import Global from './store';
 
-const initialState = JSON.parse(window.__INITIAL__STATE__) || {}
+const initialState = window.__INITIAL__STATE__ || {}
 
 const appStore = {
   global: new Global(initialState.global)

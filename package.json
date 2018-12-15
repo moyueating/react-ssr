@@ -20,6 +20,8 @@
     "axios": "^0.18.0",
     "babel-polyfill": "^6.26.0",
     "body-parser": "^1.18.3",
+    "ejs": "^2.6.1",
+    "ejs-compiled-loader": "^1.1.0",
     "express": "^4.16.4",
     "express-session": "^1.15.6",
     "mobx": "^5.6.0",
@@ -29,6 +31,7 @@
     "react": "^16.6.3",
     "react-async-bootstrapper": "^2.1.1",
     "react-dom": "^16.6.3",
+    "react-helmet": "^5.2.0",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "serve-favicon": "^2.5.0"
@@ -67,6 +70,7 @@
     "webpack": "^4.26.1",
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.10",
-    "webpack-merge": "^4.1.4"
+    "webpack-merge": "^4.1.4",
+    "webpack-node-externals": "^1.7.2"
   }
 }
