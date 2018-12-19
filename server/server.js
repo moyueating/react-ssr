@@ -4,6 +4,7 @@ const express = require('express')
 const favicon = require('serve-favicon')
 const bodyParser = require('body-parser')
 const session = require('express-session')
+const ssr = require('./utils/ssr')
 const ReactDomServer = require('react-dom/server')
 
 const isDev = process.env.NODE_ENV === 'development'
@@ -32,15 +33,16 @@ if(isDev){
   devStatic(app)
 
 }else{
-  const App = require('../dist/server_entry').default
-  const template = fs.readFileSync(path.join(__dirname, '../dist/index.html'), 'utf-8')
+  const bundle = require('../dist/server_entry')
+  const template = fs.readFileSync(path.join(__dirname, '../dist/server.ejs'), 'utf-8')
   app.use('/public', express.static(path.join(__dirname, '../dist')))
 
   app.get('*', (req, res) => {
-    const appString = ReactDomServer.renderToString(App)
-    res.send(
-      template.replace('<!--app-->', appString)
-    )
+    // const appString = ReactDomServer.renderToString(App)
+    // res.send(
+    //   template.replace('<!--app-->', appString)
+    // )
+    ssr(bundle, template, req, res)
   })
 }
 

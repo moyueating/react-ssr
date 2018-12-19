@@ -1,5 +1,4 @@
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const os = require('os')
 const HappyPack = require('happypack')
@@ -58,15 +57,6 @@ module.exports = {
       format: '  build [:bar] ' + chalk.green.bold(':percent') + ' (:elapsed seconds)',
       clear: false,
       width: 200
-    }),
-    new HtmlWebpackPlugin({
-      inject: true,
-      template: path.resolve(__dirname, '../public/index.html'),
-    }),
-    new HtmlWebpackPlugin({
-      inject: true,
-      template: '!!ejs-compiled-loader!' + path.resolve(__dirname, '../public/server.ejs'),
-      filename: 'server.ejs'
     }),
     new HappyPack({
       // 用唯一的标识符 id 来代表当前的 HappyPack 是用来处理一类特定的文件

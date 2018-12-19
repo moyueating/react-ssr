@@ -13,7 +13,7 @@ const MemoryFileSystem = require("memory-fs")
 const bootstrapper = require("react-async-bootstrapper")
 const webpackServerConfig = require('../../config/webpack.server')
 const { Helmet } = require('react-helmet')
-
+const serverRender = require('./ssr')
 const NativeModule = require('module')
 const mfs = new MemoryFileSystem()
 
@@ -32,7 +32,7 @@ const getModuleFromString = (bundle, filename) => {
 
 const serverCompile = webpack(webpackServerConfig)
 
-let serverBundle, createStore
+let serverBundle
 // 关键：将webpack输入指定内存中
 serverCompile.outputFileSystem = mfs
 serverCompile.watch({}, (err, stats) => {
@@ -53,8 +53,9 @@ serverCompile.watch({}, (err, stats) => {
   // const m = new NativeModule()
   // m._compile(bundle, 'server_entry.js')
   const m = getModuleFromString(bundle, 'server_entry.js')
-  serverBundle = m.exports.default
-  createStore = m.exports.createStore
+  // serverBundle = m.exports.default
+  // createStore = m.exports.createStore
+  serverBundle = m.exports
 })
 
 
@@ -83,36 +84,8 @@ module.exports = function devSSR(app) {
   app.get('*', (req, res) => {
     // console.log(req.url)
     getTemplate().then(tpl => {
-      const routerContext = {}
-      const stores = createStore()
-      // console.log(stores.global.count)
-      const appHtml = serverBundle(stores, req.url, routerContext)
 
-      bootstrapper(appHtml).then(() => {
-        if(routerContext.action === 'REPLACE'){
-          res.redirect(302, routerContext.url)
-          return res.end()
-        }
-        console.log(Helmet.renderStatic)
-        const helmet = Helmet.rewind()
-        const state = getStoreState(stores)
-        const content = ReactDomServer.renderToString(appHtml)
-        // helmet的renderStatic要在renderToString之后
-        // const helmet = Helmet.renderStatic()
-        console.log( helmet.title.toString())
-
-        // res.send(tpl.replace('<!--app-->', content).replace('<>', JSON.stringify(state)))
-        const html = ejs.render(tpl, {
-          appHtml: content,
-          initalState: JSON.stringify(state),
-          meta: helmet.meta.toString(),
-          title: helmet.title.toString(),
-          link: helmet.link.toString(),
-          style: helmet.style.toString()
-        })
-
-        res.send(html)
-      })
+      serverRender(serverBundle, tpl, req, res)
     })
   })
 

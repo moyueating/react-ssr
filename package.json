@@ -9,7 +9,8 @@
     "build:server": "cross-env NODE_ENV=production webpack --config config/webpack.server.js",
     "dev:client": "cross-env NODE_ENV=development webpack-dev-server --config config/webpack.client.dev.js",
     "dev:server": "nodemon server/server.js",
-    "build": "npm run clear && npm run build:client && npm run build:server"
+    "build": "npm run clear && npm run build:client && npm run build:server",
+    "start": "cross-env NODE_ENV=production node server/server.js"
   },
   "keywords": [
     "ssr"
