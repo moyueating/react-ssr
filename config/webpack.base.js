@@ -6,12 +6,14 @@ const happyThreadPool = HappyPack.ThreadPool({size: os.cpus().length})
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const chalk = require('chalk')
 
+const host = require('../app.config').cdn.host
+
 module.exports = {
   mode: process.env.NODE_ENV,
   output: {
     path: path.resolve(__dirname, '../dist'),
     filename: "[name].[hash:8].js",
-    publicPath: '/public/'
+    publicPath: host
   },
   module: {
     rules: [
@@ -51,7 +53,7 @@ module.exports = {
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: "css/[name].[hash:8].css",
+      filename: "[name].[chunkhash:8].css",
     }),
     new ProgressBarPlugin({
       format: '  build [:bar] ' + chalk.green.bold(':percent') + ' (:elapsed seconds)',
