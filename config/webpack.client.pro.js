@@ -5,9 +5,13 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpackBaseConfig = require('./webpack.base.js');
 const path = require('path')
 
+const cdnConfig = require('../app.config').cdn
 
 const clientConfig = merge(webpackBaseConfig, {
 	entry: ['babel-polyfill', 'react-hot-loader/patch', './client/index.js'],
+	output: {
+		publicPath: cdnConfig.host
+	},
 	plugins: [
 		new UglifyJsPlugin({
 			uglifyOptions:{

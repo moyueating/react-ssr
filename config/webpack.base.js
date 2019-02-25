@@ -6,14 +6,13 @@ const happyThreadPool = HappyPack.ThreadPool({size: os.cpus().length})
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const chalk = require('chalk')
 
-const host = require('../app.config').cdn.host
 
 module.exports = {
   mode: process.env.NODE_ENV,
   output: {
     path: path.resolve(__dirname, '../dist'),
     filename: "[name].[hash:8].js",
-    publicPath: host
+    publicPath: '/public/'
   },
   module: {
     rules: [
