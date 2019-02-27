@@ -25,8 +25,8 @@ app.use(session({
 
 app.use(favicon(path.join(__dirname, path.join('../public'), 'favicon.ico')))
 
-app.use('/api/user', require('./utils/cnode-proxy-login'))
-app.use('/api', require('./utils/cnode-proxy'))
+app.use('/ssr/api/user', require('./utils/cnode-proxy-login'))
+app.use('/ssr/api', require('./utils/cnode-proxy'))
 
 if(isDev){
   const devStatic= require('./utils/dev-static')

@@ -14,7 +14,7 @@ const appStore = {
 export default () => {
   return (
     <Provider appStore={appStore}>
-      <BrowserRouter>
+      <BrowserRouter basename="/ssr">
         <Routes />
       </BrowserRouter>
     </Provider>

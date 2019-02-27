@@ -12,7 +12,7 @@ import { Helmet } from "react-helmet";
 export default class TopicList extends Component {
 
   componentDidMount() {
-    axios.get('/api/topics').then(res => {
+    axios.get('/ssr/api/topics').then(res => {
       console.log(res)
     })
   }
@@ -31,7 +31,7 @@ export default class TopicList extends Component {
   }
 
   login = () => {
-    axios.post('/api/user/login', {
+    axios.post('/ssr/api/user/login', {
       accessToken: ''
     }).then(res => {
       console.log(res)
@@ -39,7 +39,7 @@ export default class TopicList extends Component {
   }
 
   mark = () => {
-    axios.post('/api/message/mark_all?needAccessToken=true').then(res => {
+    axios.post('/ssr/api/message/mark_all?needAccessToken=true').then(res => {
       console.log(res)
     })
   }
@@ -51,7 +51,7 @@ export default class TopicList extends Component {
   render() {
     // console.log(this.props)
     // console.log('ssss', this.props.appStore.global.count)
-    console.log('render')
+    // console.log('render')
     return (
       <div>
         <Helmet>
