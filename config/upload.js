@@ -59,7 +59,7 @@ const uploads = files.map(fileName => {
 
 
 Promise.all(uploads).then(res => {
-  console.log('upload success:', resps)
+  console.log('upload success:', res)
 }).catch(errs => {
   console.log('upload fail:', errs)
 })
